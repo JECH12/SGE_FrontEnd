@@ -1,0 +1,75 @@
+<div class="container mt-5">
+
+  <div class="card shadow-lg p-4 border-0">
+    <h2 class="mb-4 text-primary">Crear Nuevo Empleado</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Nombre completo</label>
+        <input type="text" class="form-control form-control-lg" formControlName="fullName">
+        <div class="text-danger mt-1" *ngIf="form.controls.fullName.touched && form.controls.fullName.invalid">
+          El nombre es requerido (mínimo 3 caracteres).
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Fecha de contratación</label>
+        <input type="date" class="form-control form-control-lg" formControlName="hireDate">
+        <div class="text-danger mt-1" *ngIf="form.controls.hireDate.touched && form.controls.hireDate.invalid">
+          La fecha es requerida.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Salario</label>
+        <input type="number" class="form-control form-control-lg" formControlName="salary">
+        <div class="text-danger mt-1" *ngIf="form.controls.salary.touched && form.controls.salary.invalid">
+          Debe ingresar un salario válido.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Departamento</label>
+        <select class="form-select form-select-lg" formControlName="departmentId">
+          <option value="" disabled selected>Seleccione...</option>
+          <option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</option>
+        </select>
+        <div class="text-danger mt-1" *ngIf="form.controls.departmentId.touched && form.controls.departmentId.invalid">
+          El departamento es requerido.
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Cargo</label>
+        <select class="form-select form-select-lg" formControlName="positionId">
+          <option value="" disabled selected>Seleccione...</option>
+          <option *ngFor="let p of positions" [value]="p.id">{{ p.name }}</option>
+        </select>
+        <div class="text-danger mt-1" *ngIf="form.controls.positionId.touched && form.controls.positionId.invalid">
+          La posición es requerida.
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <button class="btn btn-primary btn-lg w-100" [disabled]="loading">
+        <span *ngIf="!loading">Crear empleado</span>
+        <span *ngIf="loading">Guardando...</span>
+      </button>
+
+    </form>
+
+    <!-- Botón Volver -->
+    <div class="mt-3">
+      <button class="btn btn-outline-secondary w-100"
+              [routerLink]="['/employees']">
+        ← Volver al listado
+      </button>
+    </div>
+
+  </div>
+
+</div>
