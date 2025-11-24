@@ -30,5 +30,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/employees/pages/edit-employee/edit-employee.component')
         .then(c => c.EmployeesEditComponent)
+  },
+  {
+    path: '**',
+    redirectTo: 'employees'
   }
 ];
